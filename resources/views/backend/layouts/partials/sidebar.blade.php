@@ -85,14 +85,14 @@
     <!--/ menu and logo -->
 
     <!-- profile link -->
-    <button
+    <a href="{{route('admin.logout')}}"
         class="hidden md:flex w-full xl:w-auto flex-col xl:flex-row items-center justify-center xl:justify-start space-y-4 xl:space-y-0 xl:space-x-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 absolute left-0 xl:left-8  bottom-6">
         <img src="images/user.jpg" alt="Abigail Wallace" class="w-14 h-14 rounded-full">
         <div class="flex flex-col items-center xl:items-start  text-sm">
             <span class="font-bold text-blue-900 ">Abigail Wallace</span>
             <span class="font-bold text-sm text-blue-800 opacity-50">View profile</span>
         </div>
-    </button>
+    </a>
     <!--/ profile link -->
 
 </div>
