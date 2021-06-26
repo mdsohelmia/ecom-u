@@ -33,7 +33,13 @@
                             </td>
                             <td>{{$user->created_at}}</td>
                             <td>
-                                <a href="{{route('users.destroy',$user->id)}}">Delete</a>
+
+                                <form action="{{route('users.destroy',$user->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+
                             </td>
                         </tr>
                     @endforeach
