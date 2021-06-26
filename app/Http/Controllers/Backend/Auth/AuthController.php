@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Backend\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthValidationRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -16,27 +17,15 @@ class AuthController extends Controller
         return view('backend.auth.index');
     }
 
-    public function loginProcess(Request $request): RedirectResponse
+    public function loginProcess(AuthValidationRequest $request): RedirectResponse
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ],[
-            'email.required'=>'email dite hobe',
-            'email.email'=>'email validae email de'
-        ]);
-
-        $credentials = [
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ];;
-
-        if ($this->myCustomAttempt($credentials)) {
-            return redirect()->route('dashboard');
+        $credentials = $request->validated();
+        if (auth()->attempt($credentials)) {
+            return redirect()->intended(route('dashboard'));
         }
+        session()->flash('message', 'Invalid credentials');
 
-        return back();
-
+        return redirect()->back()->withInput();
     }
 
 

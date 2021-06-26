@@ -14,9 +14,14 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('products', [DashboardController::class, 'showProduct']);
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
-    Route::get('users/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('users', [UserController::class, 'store'])->name('users.store');
+   //users route
+    Route::group(['prefix' => 'users', 'as' => 'users.'], static function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::get('users/{id}', [UserController::class, 'destroy'])->name('destroy');
+    });
+
 
 });
 

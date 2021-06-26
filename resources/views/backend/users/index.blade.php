@@ -15,6 +15,7 @@
                         <th class="py-2 px-3">Email</th>
                         <th class="py-2 px-3">Status</th>
                         <th class="py-2 px-3">Created at</th>
+                        <th class="py-2 px-3">Action</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
@@ -31,10 +32,14 @@
                       </span>
                             </td>
                             <td>{{$user->created_at}}</td>
+                            <td>
+                                <a href="{{route('users.destroy',$user->id)}}">Delete</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                {{$users->links()}}
             </div>
         </div>
         <a href="#" class="font-bold text-blue-600 inline-block mt-5 hover:underline">View all orders</a>

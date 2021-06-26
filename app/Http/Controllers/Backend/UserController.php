@@ -13,9 +13,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
-
-        return view('backend.users.index',compact('users'));
+        return view('backend.users.index', [
+            'users' => User::paginate(15),
+        ]);
     }
 
     public function create()
@@ -33,6 +33,13 @@ class UserController extends Controller
             'role' => $request->input('role'),
         ];
         User::create($data);
+        return back();
+    }
+
+    public function destroy($id): \Illuminate\Http\RedirectResponse
+    {
+        $user = User::find($id);
+        $user->delete();
         return back();
     }
 }
