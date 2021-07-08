@@ -13,8 +13,10 @@ class UserController extends Controller
 
     public function index()
     {
+
         return view('backend.users.index', [
-            'users' => User::paginate(15),
+            'users' => User::select(['id','first_name','last_name','email','role','created_at','created_by','is_active'])
+                ->with('createBy:id,first_name')->simplePaginate(),
         ]);
     }
 
@@ -42,6 +44,9 @@ class UserController extends Controller
         $user->delete();
         return back();
     }
+
+
+    //orm
 }
 
 

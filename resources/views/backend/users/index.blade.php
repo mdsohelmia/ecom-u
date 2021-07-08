@@ -13,7 +13,9 @@
                         <th class="py-2 px-3">First Name</th>
                         <th class="py-2 px-3">Last Name</th>
                         <th class="py-2 px-3">Email</th>
+                        <th class="py-2 px-3">Role</th>
                         <th class="py-2 px-3">Status</th>
+                        <th class="py-2 px-3">Creator</th>
                         <th class="py-2 px-3">Created at</th>
                         <th class="py-2 px-3">Action</th>
                     </tr>
@@ -25,19 +27,21 @@
                             <td class="py-3 px-3">{{$user->first_name}}</td>
                             <td class="py-3 px-3">{{$user->last_name}}</td>
                             <td class="py-3 px-3">{{$user->email}}</td>
+                            <td class="py-3 px-3">{{$user->role}}</td>
                             <td class="py-3 px-3">
                       <span
-                          class="bg-green-100 text-green-500 text-xs rounded-full px-3 py-1  w-16 inline-block text-center  uppercase">
-                          active
+                          class="{{$user->is_active ? 'bg-green-100 text-green-500': 'bg-red-100 text-red-500'}} text-xs rounded-full px-3 py-1  w-16 inline-block text-center  uppercase">
+                          {{$user->is_active ? 'active':'inactive'}}
                       </span>
                             </td>
+                            <td>{{optional($user->createBy)->first_name}}</td>
                             <td>{{$user->created_at}}</td>
                             <td>
 
                                 <form action="{{route('users.destroy',$user->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit">Delete</button>
+                                    <button type="submit" class="bg-white">Delete</button>
                                 </form>
 
                             </td>
@@ -48,6 +52,6 @@
                 {{$users->links()}}
             </div>
         </div>
-        <a href="#" class="font-bold text-blue-600 inline-block mt-5 hover:underline">View all orders</a>
+
     </div>
 @endsection
