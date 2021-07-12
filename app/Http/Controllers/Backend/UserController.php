@@ -13,9 +13,8 @@ class UserController extends Controller
 
     public function index()
     {
-
         return view('backend.users.index', [
-            'users' => User::select(['id','first_name','last_name','email','role','created_at','created_by','is_active'])
+            'users' => User::select(['id', 'first_name', 'last_name', 'email', 'role', 'created_at', 'created_by', 'is_active'])
                 ->with('createBy:id,first_name')->simplePaginate(),
         ]);
     }

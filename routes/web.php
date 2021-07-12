@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\AuthController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('products', [DashboardController::class, 'showProduct']);
         //users route
         Route::resource('users', UserController::class);
+        // Categories route
+        Route::resource('categories', CategoryController::class);
     });
 });
 

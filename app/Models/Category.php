@@ -11,4 +11,6 @@ class Category extends Model
 
     public const  ACTIVE = 1;
     public const IN_ACTIVE = 0;
+
+    protected $guarded = [];
 }
